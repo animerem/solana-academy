@@ -1,26 +1,26 @@
-import * as React from 'react'
-import ReactGA from 'react-ga'
-import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import * as React from 'react';
+import ReactGA from 'react-ga';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import { App } from './app/App.controller'
-import { configureStore } from './app/App.store'
-import { unregister } from './serviceWorker'
-import { GlobalStyle } from './styles'
-// @ts-ignore
-import TagManager from 'react-gtm-module'
+import { App } from './app/App.controller';
+import { configureStore } from './app/App.store';
+import { unregister } from './serviceWorker';
+import { GlobalStyle } from './styles';
+import TagManager from 'react-gtm-module';
 
-import './styles/fonts.css'
+import './styles/fonts.css';
 
-export const store = configureStore({})
+export const store = configureStore({});
 
-ReactGA.initialize('UA-192160338-1')
+ReactGA.initialize('UA-192160338-1');
 
-const tagManagerArgs = {
-    gtmId: process.env.REACT_APP_GTM_ID
+const gtmId = process.env.REACT_APP_GTM_ID;
+if (gtmId) {
+  TagManager.initialize({ gtmId });
+} else {
+  console.warn('GTM ID is not set in environment variables.');
 }
-TagManager.initialize(tagManagerArgs);
-
 
 export const Root = () => {
   return (
@@ -32,7 +32,8 @@ export const Root = () => {
         </Router>
       </Provider>
     </div>
-  )
-}
+  );
+};
 
-unregister()
+// Unregister service worker for development. Use register() to enable offline support.
+unregister();

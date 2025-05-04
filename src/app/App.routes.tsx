@@ -1,30 +1,20 @@
-/**
- * React Dependency
- * **/
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
-import React from 'react'
-import {Route, Switch} from 'react-router-dom'
+import { Chapter } from 'pages/Chapter/Chapter.controller';
+import { Course } from 'pages/Course/Course.controller';
+import { Error404 } from 'pages/Error404/Error404.controller';
+import { Home } from 'pages/Home/Home.controller';
 
-/**
- * Custom Components
- * **/
-import {Chapter} from 'pages/Chapter/Chapter.controller'
-import {Course} from 'pages/Course/Course.controller'
-import {Error404} from 'pages/Error404/Error404.controller'
-import {Home} from 'pages/Home/Home.controller'
-export const AppRoutes = ({ location }: any) => (
-  <Switch location={location}>
-    <Route exact path="/">
-      <Home />
-    </Route>
-    <Route path="/*/info">
-      <Course />
-    </Route>
-    <Route path="/*/chapter-*">
-      <Chapter />
-    </Route>
-    <Route>
-      <Error404 />
-    </Route>
-  </Switch>
-)
+export const AppRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <Routes location={location} key={location.key}>
+      <Route path="/" element={<Home />} />
+      <Route path=":course/info" element={<Course />} />
+      <Route path=":course/chapter-:chapter" element={<Chapter />} />
+      <Route path="*" element={<Error404 />} />
+    </Routes>
+  );
+};

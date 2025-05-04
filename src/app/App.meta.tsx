@@ -1,5 +1,5 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 export const AppMeta = () => (
   <Helmet>
@@ -10,6 +10,5 @@ export const AppMeta = () => (
     <meta property="og:site_name" content="SolanaAcademy" />
     <meta property="og:type" content="article" />
     <meta property="og:description" content="Learn Solana" />
-
   </Helmet>
-)
+);
